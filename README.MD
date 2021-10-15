@@ -33,9 +33,8 @@ Django rest framework shopping cart With Vuejs frontend
 - Clone repository
 
 ``` python
-# TODO: COPY PASTE PROJECT ADDRESS
-# git clone https://github.com/GitHub_nick/django.git
-# cd django
+git clone https://github.com/Denisse-AB/django_store.git
+cd django_store
 ```
 
 - Create your virtual environment
