@@ -20,7 +20,6 @@
       <v-toolbar-title>Store</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <!--TODO: profile route needs id param -->
       <v-btn
         v-if="isLogin"
         class="mr-3"

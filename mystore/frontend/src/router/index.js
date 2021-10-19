@@ -52,9 +52,9 @@ const routes = [
     component: () => import('../views/PasswordResetConfirm.vue')
   },
   {
-    path: '/checkout',
-    name: 'Checkout',
-    component: () => import(/* webpackChunkName: "checkout" */ '../views/Checkout.vue')
+    path: '/pre-checkout',
+    name: 'PreCheckout',
+    component: () => import(/* webpackChunkName: "pre-checkout" */ '../views/PreCheckout.vue')
   },
   {
     path: '/about',
