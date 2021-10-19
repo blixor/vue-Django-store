@@ -2,6 +2,9 @@
 
 Django rest framework shopping cart With Vuejs frontend
 
+## :hammer_and_pick: Under Construction :hammer_and_pick:
+- Frontend checkout system and Orders app
+
 ## Functionality Login system
 
 - Log in
