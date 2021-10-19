@@ -54,7 +54,17 @@ const routes = [
   {
     path: '/pre-checkout',
     name: 'PreCheckout',
-    component: () => import(/* webpackChunkName: "pre-checkout" */ '../views/PreCheckout.vue')
+    component: () => import('../views/PreCheckout.vue')
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: () => import('../views/Checkout.vue')
+  },
+  {
+    path: '/guest-form',
+    name: 'GuestForm',
+    component: () => import('../views/GuestForm.vue')
   },
   {
     path: '/about',
