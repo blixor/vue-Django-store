@@ -108,8 +108,6 @@
           </v-row>
           <v-card-actions v-if="$store.state.cart.length > 0">
             <v-btn to="/pre-checkout"
-              :loading="loading"
-              :disabled="disabled"
               block
               color="#385F73"
               class="mt-3"
@@ -134,16 +132,12 @@
 export default {
   name: 'Cart',
 
-  data: () => ({
-    loading: false,
-    disabled: false
-  }),
-
   computed: {
     subTotal () {
       return this.$store.getters.cartTotal
     }
   },
+
   methods: {
     Remove (itemId) {
       this.$store.commit('remove', itemId)
