@@ -81,12 +81,14 @@
         md="4"
         sm="6"
       >
+      <!-- Sub total card -->
         <v-card
           class="pa-2 mb-16 mt-5 text-center"
           elevation="3"
-          tile
         >
-          <h2>Your Total !</h2>
+          <h2 class="mb-2">Sub Total</h2>
+
+          <v-divider></v-divider>
 
           <v-row
             no-gutters
@@ -95,36 +97,33 @@
               class="mt-3"
               cols="6"
             >
-            <h3 class="mb-1">Subtotal:</h3>
-            <h3 class="mb-1">Tax (11.5%):</h3>
-
-            <v-divider></v-divider>
-
-            <h3 class="mt-1">Total:</h3>
+              <h3 class="my-1">Subtotal:</h3>
             </v-col>
             <v-col
               class="mt-3"
               cols="6"
             >
-            <h3 class="mb-1">${{ subTotal }}</h3>
-            <h3 class="mb-1">${{ tax }}</h3>
-
-            <v-divider></v-divider>
-
-            <h3 class="mt-1">${{ total }}</h3>
+              <h3 class="my-1">${{ subTotal }}</h3>
             </v-col>
           </v-row>
           <v-card-actions v-if="$store.state.cart.length > 0">
-            <v-btn to="/checkout"
+            <v-btn to="/pre-checkout"
               :loading="loading"
               :disabled="disabled"
               block
-              color="success"
+              color="#385F73"
               class="mt-3"
               elevation="2"
               rounded
-            >Checkout</v-btn>
+              dark
+            >Sub Total</v-btn>
           </v-card-actions>
+
+          <p v-if="$store.state.cart.length >= 1"
+             class="text-caption">
+             *Review your transaction in next page.
+          </p>
+
         </v-card>
       </v-col>
     </v-row>
@@ -143,14 +142,6 @@ export default {
   computed: {
     subTotal () {
       return this.$store.getters.cartTotal
-    },
-    tax () {
-      const number = this.subTotal * 0.115
-      return number.toFixed(2)
-    },
-    total () {
-      const res = parseFloat(this.subTotal) + parseFloat(this.tax)
-      return res.toFixed(2)
     }
   },
   methods: {
