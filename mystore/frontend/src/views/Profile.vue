@@ -55,6 +55,7 @@
                 <!-- state -->
                 <v-text-field
                   v-model="state"
+                  @input="(val) => (state = state.toUpperCase())"
                   :rules="[rules.required, rules.min]"
                   label="state"
                   placeholder="State"

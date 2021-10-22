@@ -80,9 +80,9 @@
               cols='4'
             >
               <v-text-field
-                @input="(val) => (state = state.toUpperCase())"
                 class="mx-5"
                 v-model="state"
+                @input="(val) => (state = state.toUpperCase())"
                 :rules="[rules.required, rules.min]"
                 label="state"
                 placeholder="State"
