@@ -86,6 +86,9 @@ export default new Vuex.Store({
       state.snackbar.color = payload.color
       state.snackbar.text = payload.text
     },
+    guestUser (state, payload) {
+      state.user = payload
+    },
     remove (state, itemId) {
       // Find product index and delete from cart.
       const index = state.cart.findIndex((item) => {
