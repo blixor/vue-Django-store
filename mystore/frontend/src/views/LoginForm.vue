@@ -117,14 +117,18 @@ export default {
           }
           // Grant access
           if (this.$store.getters.authStatus === 'success' && this.$store.getters.isLoggedIn) {
-            this.$router.push('/')
+            if (this.$store.state.cart.length >= 1) {
+              this.$router.push('/checkout')
+            } else {
+              this.$router.push('/')
+            }
           }
         })
-        .catch((err) => {
+        .catch((_err) => {
           this.loading = false
           const show = true
           const color = 'red darken-3'
-          const text = err
+          const text = 'An error has ocurred'
           this.$store.commit('cartSnack', { show, color, text })
         })
     }
