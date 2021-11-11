@@ -124,13 +124,6 @@ export default {
             }
           }
         })
-        .catch((_err) => {
-          this.loading = false
-          const show = true
-          const color = 'red darken-3'
-          const text = 'An error has ocurred'
-          this.$store.commit('cartSnack', { show, color, text })
-        })
     }
   }
 }

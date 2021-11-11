@@ -327,6 +327,13 @@ export default {
         const password = this.password
         const password2 = this.password2
         this.$store.dispatch('changePassword', { old_password, password, password2 })
+          .catch((_err) => {
+            this.loading2 = false
+            const show = true
+            const color = 'red darken-3'
+            const text = 'An error has ocurred!'
+            this.$store.commit('cartSnack', { show, color, text })
+          })
       }
     },
     deleteAccount () {
