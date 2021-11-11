@@ -51,6 +51,10 @@ export default new Vuex.Store({
       state.token = ''
       state.user = {}
     },
+    CHECKOUT_SUCCESS (state) {
+      state.stars = []
+      state.cart = []
+    },
     starRating (state, payload) {
       const { itemId, value } = payload
       const i = state.stars.findIndex((item) => {
@@ -76,7 +80,7 @@ export default new Vuex.Store({
         return item.itemId === itemId
       })
       if (indx === -1) {
-        state.cart.push({ itemId, qty, image, name, price })
+        state.cart.push({ name, itemId, qty, image, price })
       } else {
         state.cart[indx].qty += qty
       }
@@ -129,21 +133,18 @@ export default new Vuex.Store({
     },
     async register ({ commit }, user) {
       commit('AUTH_REQUEST')
-      await axios.post('http://127.0.0.1:8000/users/register/', user)
-        .then((res) => {
-          if (res.status === 201) {
-            router.push('login/')
-          }
+      const res = await axios.post('http://127.0.0.1:8000/users/register/', user)
+      if (res.status === 200) {
+        router.push('login/')
+      } else {
+        commit('AUTH_ERROR')
+        commit('cartSnack', {
+          show: true,
+          color: 'red darken-3',
+          text: res.data.username ? res.data.username[0] : 'An error has ocurred'
         })
-        .catch((_err) => {
-          commit('AUTH_ERROR')
-          commit('cartSnack', {
-            show: true,
-            color: 'red darken-3',
-            text: 'An error has ocurred, try again!'
-          })
-          delete axios.defaults.headers.common['Authorization']
-        })
+        delete axios.defaults.headers.common['Authorization']
+      }
     },
     async login ({ commit }, user) {
       commit('AUTH_REQUEST')
@@ -165,6 +166,7 @@ export default new Vuex.Store({
           delete axios.defaults.headers.common['Authorization']
         })
     },
+    // user update
     async update ({ commit, state }, profile) {
       const id = state.user.user_id
       const token = state.token
@@ -185,6 +187,30 @@ export default new Vuex.Store({
           })
         })
     },
+    async checkout ({ commit, state }, payload) {
+      const { subtotal, tax, total } = payload
+      const res = await axios.post('http://127.0.0.1:8000/orders/order/', {
+        order: {
+          cart: state.cart,
+          subtotal: subtotal,
+          tax: tax,
+          total: total,
+          first_name: state.user.first_name,
+          last_name: state.user.last_name,
+          email: state.user.email,
+          phone: state.user.phone,
+          address: state.user.address,
+          city: state.user.city,
+          state: state.user.state,
+          zipcode: state.user.zipcode
+        }
+      })
+      if (res.status === 200) {
+        commit('CHECKOUT_SUCCESS')
+        // TODO: push thankyou page
+      }
+    },
+    // deactivate user
     async delete ({ commit, state }, user) {
       const id = state.user.user_id
       const token = state.token
@@ -226,13 +252,6 @@ export default new Vuex.Store({
             color: 'success',
             text: 'Password Change Success!'
           })
-        })
-        .catch((_err) => {
-          this.loading2 = false
-          const show = true
-          const color = 'red darken-3'
-          const text = 'An error has ocurred!'
-          this.$store.commit('cartSnack', { show, color, text })
         })
     },
     async passwordReset ({ commit }, email) {

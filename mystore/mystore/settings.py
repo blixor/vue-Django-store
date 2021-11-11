@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # custom
     'store.apps.StoreConfig',
     'users.apps.UsersConfig',
+    'orders.apps.OrdersConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'django_rest_passwordreset',

@@ -1,18 +1,18 @@
 <template>
   <v-container class="grey lighten-5 mt-5">
     <v-row class="justify-center">
-      <v-alert
+      <v-alert v-if="this.$store.state.cart.length >= 1"
         class="ma-5 mt-7"
         color="#445F44"
         dark
         icon="mdi-account"
         dense
       >
-        {{ this.$store.state.user.first_name }} {{ this.$store.state.user.last_name }}:
-        {{ this.$store.state.user.address }}, {{ this.$store.state.user.city }}
-        {{ this.$store.state.user.state }}, {{ this.$store.state.user.zipcode }}
+        {{ first_name }} {{ last_name }}:
+        {{ address }}, {{ city }}
+        {{ state }}, {{ zipcode }}
         <br>
-        {{ this.$store.state.user.phone }}, {{ this.$store.state.user.email }}
+        {{ phone }}, {{ email }}
       </v-alert>
     </v-row>
     <v-row no-gutters>
@@ -131,17 +131,17 @@
             <h3 class="mt-1">${{ total }}</h3>
             </v-col>
           </v-row>
-          <v-card-actions v-if="$store.state.cart.length > 0">
-            <v-btn to="/pre-checkout"
+          <v-card-actions>
+            <v-btn v-if="this.$store.state.cart.length >= 1"
+              @click="Submit"
               :loading="loading"
-              :disabled="disabled"
               block
-              color="#668F66"
+              color="success"
               class="mt-3"
               elevation="2"
               rounded
               dark
-            >Checkout <v-icon class="ml-2">mdi-basket</v-icon></v-btn>
+            >Pay ${{ total }} <v-icon class="ml-2">mdi-basket</v-icon></v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -150,15 +150,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Cart',
 
   data: () => ({
-    loading: false,
-    disabled: false
+    loading: false
   }),
 
   computed: {
+    ...mapState({
+      first_name: state => state.user.first_name,
+      last_name: state => state.user.last_name,
+      address: state => state.user.address,
+      city: state => state.user.city,
+      state: state => state.user.state,
+      zipcode: state => state.user.zipcode,
+      phone: state => state.user.phone,
+      email: state => state.user.email
+    }),
     subTotal () {
       return this.$store.getters.cartTotal
     },
@@ -174,6 +185,21 @@ export default {
   methods: {
     Remove (itemId) {
       this.$store.commit('remove', itemId)
+    },
+
+    Submit () {
+      this.loading = true
+      const subtotal = this.subTotal
+      const tax = this.tax
+      const total = this.total
+      this.$store.dispatch('checkout', { subtotal, tax, total })
+        .catch((_err) => {
+          this.loading = false
+          const show = true
+          const color = 'red darken-3'
+          const text = 'An error has ocurred try again later'
+          this.$store.commit('cartSnack', { show, color, text })
+        })
     }
   }
 }

@@ -18,5 +18,6 @@ class Profile(models.Model):
     zipcode = models.CharField(
         _("zipcode"), max_length=5, blank=False, null=True)
 
+
     def __str__(self):
         return f'{self.user.username} Profile'
