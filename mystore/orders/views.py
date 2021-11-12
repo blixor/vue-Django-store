@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .serializers import OrderSerializers
 from .models import Order
 
+from store.models import Product
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().order_by('-created_at')
@@ -13,14 +15,19 @@ class OrderViewSet(viewsets.ModelViewSet):
         if request.method == 'POST':
             order = request.data.get('order')
             cart = request.data.get('order')['cart']
-            
+
             for i in cart:
-                '''
-                TODO:
-                subtract qty of this order from product inventory
-                add star-rating to model rating
-                '''
+                # Product inventory subtraction
                 i.pop('image')
+                item_id = i.get('itemId')
+                qty = i.get('qty')
+                p = Product.objects.get(pk=item_id)
+
+                if p.inventory == 0:
+                    return Response(status=status.HTTP_409_CONFLICT)
+
+                p.inventory = p.inventory - qty
+                p.save()
 
             serializer = self.serializer_class(data=order,
                                                context={'request': request})
