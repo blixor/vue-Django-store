@@ -207,6 +207,7 @@ export default new Vuex.Store({
       })
       if (res.status === 200) {
         commit('CHECKOUT_SUCCESS')
+        location.reload()
         // TODO: push thankyou page
       }
     },
