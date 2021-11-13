@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from .serializers import OrderSerializers
 from .models import Order
 
-from store.models import Product
+from store.models import Product, Rating
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -15,6 +15,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         if request.method == 'POST':
             order = request.data.get('order')
             cart = request.data.get('order')['cart']
+            rating = request.data.get('order')['rating']
 
             for i in cart:
                 # Product inventory subtraction
@@ -28,6 +29,23 @@ class OrderViewSet(viewsets.ModelViewSet):
 
                 p.inventory = p.inventory - qty
                 p.save()
+
+            if rating:
+                for i in rating:
+                    item_id = i.get('itemId')
+                    value = i.get('value')
+                    r = Rating.objects.get(product=item_id)
+                    if value == 1:
+                        r.one += 1
+                    elif value == 2:
+                        r.two += 1
+                    elif value == 3:
+                        r.three += 1
+                    elif value == 4:
+                        r.four += 1
+                    elif value == 5:
+                        r.five += 1
+                    r.save()
 
             serializer = self.serializer_class(data=order,
                                                context={'request': request})

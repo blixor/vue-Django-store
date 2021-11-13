@@ -192,6 +192,7 @@ export default new Vuex.Store({
       const res = await axios.post('http://127.0.0.1:8000/orders/order/', {
         order: {
           cart: state.cart,
+          rating: state.stars,
           subtotal: subtotal,
           tax: tax,
           total: total,
