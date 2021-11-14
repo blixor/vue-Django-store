@@ -134,7 +134,7 @@ export default new Vuex.Store({
     async register ({ commit }, user) {
       commit('AUTH_REQUEST')
       const res = await axios.post('http://127.0.0.1:8000/users/register/', user)
-      if (res.status === 200) {
+      if (res.status === 201) {
         router.push('login/')
       } else {
         commit('AUTH_ERROR')
@@ -233,7 +233,7 @@ export default new Vuex.Store({
           commit('cartSnack', {
             show: true,
             color: 'red darken-3',
-            text: 'An error has ocurred, try again!'
+            text: 'An error has ocurred, check your password'
           })
         })
     },
