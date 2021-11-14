@@ -149,17 +149,24 @@ export default {
       } else {
         // send to vuex
         this.loading = true
-        const username = this.username
-        const email = this.email
-        const first_name = this.firstname
-        const last_name = this.lastname
-        const password = this.password
-        this.$store.dispatch('register', { username, password, first_name, last_name, email })
-          .then((_res) => {
-            this.loading = false
-          }).catch((_err) => {
-            this.loading = false
+        const { username, email, password, firstname, lastname } = this
+        if (username && email && firstname && lastname && password) {
+          this.$store.dispatch('register', {
+            first_name: firstname,
+            last_name: lastname,
+            username,
+            password,
+            email
           })
+            .then((_res) => {
+              this.loading = false
+            }).catch((_err) => {
+              this.loading = false
+            })
+        } else {
+          this.loading = false
+          this.message = 'Please, fill all the blanks no spaces allowed'
+        }
       }
     }
   }

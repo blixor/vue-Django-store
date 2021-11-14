@@ -300,21 +300,21 @@ export default {
   methods: {
     updateProfile () {
       this.loading = true
-      const address = this.address
-      const city = this.city
-      const state = this.state
-      const zipcode = this.zipcode
-      const phone = this.phone
-      this.$store.dispatch('update', { address, city, state, zipcode, phone })
-        .then((_res) => {
-          this.loading = false
-        }).catch((_err) => {
-          this.loading = false
-          const show = true
-          const color = 'red darken-3'
-          const text = 'Unable to send, check your form!'
-          this.$store.commit('cartSnack', { show, color, text })
-        })
+      const { address, city, state, zipcode, phone } = this
+      if (address && city && state && zipcode && phone) {
+        this.$store.dispatch('update', { address, city, state, zipcode, phone })
+          .then((_res) => {
+            this.loading = false
+          }).catch((_err) => {
+            this.loading = false
+            const show = true
+            const color = 'red darken-3'
+            const text = 'Unable to send, check your form!'
+            this.$store.commit('cartSnack', { show, color, text })
+          })
+      } else {
+        this.loading = false
+      }
     },
     changePassword () {
       this.loading2 = true
@@ -323,17 +323,19 @@ export default {
         this.loading2 = false
       } else {
         this.loading2 = true
-        const old_password = this.old_password
-        const password = this.password
-        const password2 = this.password2
-        this.$store.dispatch('changePassword', { old_password, password, password2 })
-          .catch((_err) => {
-            this.loading2 = false
-            const show = true
-            const color = 'red darken-3'
-            const text = 'An error has ocurred!'
-            this.$store.commit('cartSnack', { show, color, text })
-          })
+        const { old_password, password, password2 } = this
+        if (old_password && password && password2) {
+          this.$store.dispatch('changePassword', { old_password, password, password2 })
+            .catch((_err) => {
+              this.loading2 = false
+              const show = true
+              const color = 'red darken-3'
+              const text = 'An error has ocurred, check your password!'
+              this.$store.commit('cartSnack', { show, color, text })
+            })
+        } else {
+          this.loading2 = false
+        }
       }
     },
     deleteAccount () {

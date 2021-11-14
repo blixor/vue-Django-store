@@ -171,25 +171,22 @@ export default {
   methods: {
     submit () {
       this.loading = true
-      const first_name = this.firstname
-      const last_name = this.lastname
-      const address = this.address
-      const city = this.city
-      const state = this.state
-      const zipcode = this.zipcode
-      const email = this.email
-      const phone = this.phone
-      this.$store.commit('guestUser', {
-        first_name,
-        last_name,
-        email,
-        phone,
-        address,
-        city,
-        state,
-        zipcode
-      })
-      this.$router.push('/checkout')
+      const { firstname, lastname, address, city, state, zipcode, email, phone } = this
+      if (firstname && lastname && address && city && state && zipcode && email && phone) {
+        this.$store.commit('guestUser', {
+          first_name: firstname,
+          last_name: lastname,
+          email,
+          phone,
+          address,
+          city,
+          state,
+          zipcode
+        })
+        this.$router.push('/checkout')
+      } else {
+        this.loading = false
+      }
     }
   }
 }
