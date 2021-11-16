@@ -53,6 +53,7 @@ cd mystore
 
 ```python
 # Use py manage.py on windows
+
 python manage.py makemigrations
 python manage.py migrate
 ```
@@ -60,14 +61,15 @@ python manage.py migrate
 
 ```python
 # Use py manage.py on windows
+
 python manage.py createsuperuser
 ```
 - Activate local project
 
 ```python
 # Use py manage.py on windows
+
 python manage.py runserver
-# Visit your localhost
 ```
 
 ## Setup Vue
@@ -79,5 +81,4 @@ cd mystore
 cd frontend
 npm install
 npm run serve
-// Visit your localhost
 ```
