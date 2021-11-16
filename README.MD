@@ -44,25 +44,40 @@ pip install pipenv
 
 pipenv install
 pipenv shell
+
+cd mystore
 ```
 
 - Configure settings.py (database connection, email and AWS)
 - Run your migrations
 
 ```python
+# Use py manage.py on windows
 python manage.py makemigrations
 python manage.py migrate
 ```
 - Create your superuser
 
 ```python
+# Use py manage.py on windows
 python manage.py createsuperuser
+```
+- Activate local project
+
+```python
+# Use py manage.py on windows
+python manage.py runserver
+# Visit your localhost
 ```
 
 ## Setup Vue
 
+- Open new terminal
+
 ```javascript
+cd mystore
 cd frontend
 npm install
 npm run serve
+// Visit your localhost
 ```
