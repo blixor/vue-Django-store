@@ -55,7 +55,7 @@
                   {{ item.name }}
                 </v-list-item-title>
                 <v-list-item-subtitle>Qty: {{ item.qty }}</v-list-item-subtitle>
-                <v-list-item-subtitle>Total: $ {{ item.qty * item.price }}</v-list-item-subtitle>
+                <v-list-item-subtitle>Total: $ {{ parseFloat(item.qty * item.price).toFixed(2) }}</v-list-item-subtitle>
               </v-list-item-content>
 
             </v-list-item>
@@ -134,7 +134,7 @@ export default {
 
   computed: {
     subTotal () {
-      return this.$store.getters.cartTotal
+      return parseFloat(this.$store.getters.cartTotal).toFixed(2)
     }
   },
 

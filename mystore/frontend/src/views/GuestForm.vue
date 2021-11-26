@@ -164,7 +164,7 @@ export default {
 
   computed: {
     subTotal () {
-      return this.$store.getters.cartTotal
+      return parseFloat(this.$store.getters.cartTotal).toFixed(2)
     }
   },
 
