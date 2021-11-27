@@ -10,7 +10,7 @@ class Product(models.Model):
       slug = models.SlugField(max_length=20, null=False, unique=True)
       image = models.ImageField(upload_to='profile_pics')
       price = models.DecimalField(max_digits=5, decimal_places=2, null=False)
-      qty = models.PositiveSmallIntegerField(null=False, default=1)
+      qty = models.PositiveSmallIntegerField(null=False, default=1, help_text='Customer quantity initialization')
       inventory = models.PositiveSmallIntegerField(null=False)
       description = models.TextField(max_length=200, null=False)
       created_at = models.DateTimeField(default=timezone.now)
