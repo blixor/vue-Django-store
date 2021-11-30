@@ -5,7 +5,7 @@ Django rest framework shopping cart With Vuejs frontend
 ---
 
 <p align="center">
-  <img src="mystore\screenshots\screenshot.png" width="500" alt="screenshot">
+  <img src="mystore\screenshots\screenshot(2).png" width="500" alt="screenshot">
 </p>
 
 ## Functionality Login system
