@@ -8,24 +8,24 @@ Django rest framework shopping cart With Vuejs frontend
   <img src="mystore\screenshots\screenshot(2).png" width="500" alt="screenshot">
 </p>
 
-## Functionality Login system
+## Features
 
 - Log in
+    - Auth Token login
     - via username & password
 - Register
-- Log out
 - Reset password
 - Forgot password
 - Change password
 - Change profile
-    - Customer address and phone number
-- Close account
+    - Customer address and phone number only
+- Star rating system
+- Inventory management system
 
-## Functionality Store
+## Functionality Store Admin
 
 - Upload products through django admin
 - Images will uploaded to AWS S3
-- Star rating system
 
 ## Requirements
 
@@ -47,10 +47,8 @@ cd django_store
 
 ```python
 pip install pipenv
-
 pipenv install
 pipenv shell
-
 cd mystore
 ```
 
