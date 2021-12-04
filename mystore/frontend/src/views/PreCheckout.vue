@@ -72,7 +72,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Checkout',
+  name: 'PreCheckout',
 
   computed: {
     ...mapGetters({

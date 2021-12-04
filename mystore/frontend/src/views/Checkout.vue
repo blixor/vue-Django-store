@@ -153,7 +153,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Cart',
+  name: 'Checkout',
 
   data: () => ({
     loading: false
