@@ -1,6 +1,6 @@
 # Django-Vue Shopping Cart
 
-Django rest framework shopping cart With Vuejs. This project provides you a template for local development.
+Django rest framework shopping cart With Vuejs. This project provides a template for local development.
 
 ---
 
