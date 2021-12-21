@@ -1,11 +1,17 @@
 # Django-Vue Shopping Cart
 
-Django rest framework shopping cart With Vuejs frontend
+Django rest framework shopping cart With Vuejs. This project provides you a template for local development.
 
 ---
 
 <p align="center">
+  <img src="mystore\screenshots\screenshot(1).png" width="500" alt="screenshot">
+</p>
+<p align="center">
   <img src="mystore\screenshots\screenshot(2).png" width="500" alt="screenshot">
+</p>
+<p align="center">
+  <img src="mystore\screenshots\screenshot(3).png" width="500" alt="screenshot">
 </p>
 
 ## Features
@@ -18,7 +24,7 @@ Django rest framework shopping cart With Vuejs frontend
 - Forgot password
 - Change password
 - Change profile
-    - Customer address and phone number only
+    - Customer address and phone number
 - Star rating system
 - Inventory management system
 
