@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 
 
 urlpatterns = [
@@ -8,6 +7,6 @@ urlpatterns = [
     path('users/', include('users.urls'), name='users'),
     path('orders/', include('orders.urls'), name='orders'),
     path('admin/', admin.site.urls),
-    url(r'api/password_reset/',
+    path('api/password_reset/',
         include('django_rest_passwordreset.urls', namespace='password_reset'))
 ]
