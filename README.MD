@@ -13,6 +13,9 @@ Django rest framework shopping cart With Vuejs. This project provides a template
 <p align="center">
   <img src="mystore\screenshots\screenshot(3).png" width="500" alt="screenshot">
 </p>
+<p align="center">
+  <img src="mystore\screenshots\admin.png" width="500" alt="screenshot">
+</p>
 
 ## Features
 
