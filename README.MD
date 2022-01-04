@@ -38,7 +38,7 @@ Django rest framework shopping cart With Vuejs. This project provides a template
 
 ## Requirements
 
-@vue/cli 4.5.13 | Python 3.9.4 | Nodejs v14.6.0 | Postgresql
+@vue/cli 4.5.13 | Python 3.9.4 | Nodejs ^16.13.1 | Postgresql
 
 - Database engine and email service
 - AWS S3 account
