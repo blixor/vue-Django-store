@@ -1,5 +1,6 @@
 <template>
   <v-snackbar
+    class="mt-15"
     v-model="$store.state.snackbar.show"
     :color="$store.state.snackbar.color"
     timeout="4000"
