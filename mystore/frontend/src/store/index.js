@@ -148,7 +148,7 @@ export default new Vuex.Store({
     },
     async login ({ commit }, user) {
       commit('AUTH_REQUEST')
-      axios.defaults.headers.common['X-CSRFToken'] = user.csrf
+      axios.defaults.headers.common['X-CSRFToken'] = user.csrftoken
       await axios.post('http://127.0.0.1:8000/users/login/', user)
         .then((res) => {
           if (res.status === 200) {
@@ -188,12 +188,12 @@ export default new Vuex.Store({
         })
     },
     async checkout ({ commit, state }, payload) {
-      const { subtotal, tax, total } = payload
+      const { subTotal, tax, total } = payload
       const res = await axios.post('http://127.0.0.1:8000/orders/order/', {
         order: {
           cart: state.cart,
           rating: state.stars,
-          subtotal: subtotal,
+          subtotal: subTotal,
           tax: tax,
           total: total,
           first_name: state.user.first_name,
@@ -208,7 +208,6 @@ export default new Vuex.Store({
       })
       if (res.status === 200) {
         commit('CHECKOUT_SUCCESS')
-        location.reload()
         // TODO: push thankyou page
       }
     },

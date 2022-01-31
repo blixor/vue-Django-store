@@ -107,21 +107,17 @@ export default {
   methods: {
     login () {
       this.loading = true
-      const username = this.username
-      const password = this.password
-      const csrf = this.csrftoken
-      this.$store.dispatch('login', { username, password, csrf })
+      const { username, password, csrftoken } = this
+      this.$store.dispatch('login', { username, password, csrftoken })
         .then((_res) => {
           if (this.$store.state.status === 'Please try again!') {
             this.loading = false
           }
           // Grant access
           if (this.$store.getters.authStatus === 'success' && this.$store.getters.isLoggedIn) {
-            if (this.$store.state.cart.length >= 1) {
-              this.$router.push('/checkout')
-            } else {
-              this.$router.push('/')
-            }
+            this.$store.state.cart.length >= 1
+              ? this.$router.push('/checkout')
+              : this.$router.push('/')
           }
         })
     }

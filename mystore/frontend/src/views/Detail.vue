@@ -117,11 +117,7 @@ export default {
         return products.id === id
       })
       const inv = this.$store.state.products[i].inventory
-      if (this.quantity >= inv) {
-        this.text = 'Only ' + inv + ' product left '
-      } else {
-        this.quantity++
-      }
+      this.quantity >= inv ? this.text = 'Only ' + inv + ' product left ' : this.quantity++
     },
     decrement () {
       if (this.quantity !== 1) {
