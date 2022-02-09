@@ -39,14 +39,16 @@
           <v-card-text>
             {{ product.description }}
           </v-card-text>
-            <div v-if="text" class="d-flex justify-center">
-              <v-alert
+            <div class="d-flex justify-center">
+              <Alert
+                v-if="text"
                 type="warning"
                 border="left"
                 color="red"
-                text
-                dense
-              >{{ text }}</v-alert>
+                :text=true
+                :dense=true
+                :message="text"
+              />
             </div>
             <div class="d-flex justify-center">
               <v-btn
@@ -97,8 +99,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'Detail',
+
+  components: {
+    Alert: () => import('../components/Alert.vue')
+  },
 
   props: {
     slug: String

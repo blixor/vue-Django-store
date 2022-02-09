@@ -1,19 +1,18 @@
 <template>
   <v-container class="grey lighten-5 mt-5">
-    <v-row class="justify-center">
-      <v-alert v-if="this.$store.state.cart.length >= 1"
+    <v-row
+      v-if="this.$store.state.cart.length >= 1"
+      class="justify-center">
+      <Alert
         class="ma-5 mt-7"
         color="#445F44"
-        dark
+        border="bottom"
         icon="mdi-account"
-        dense
-      >
-        {{ first_name }} {{ last_name }}:
-        {{ address }}, {{ city }}
-        {{ state }}, {{ zipcode }}
-        <br>
-        {{ phone }}, {{ email }}
-      </v-alert>
+        :dark=true
+        :text=false
+        :dense=false
+        :message="message"
+      />
     </v-row>
     <v-row no-gutters>
       <v-col
@@ -44,49 +43,14 @@
           :index="index"
           cols="12"
         >
-          <v-card
+          <Card
             class="mx-auto mt-5"
-            max-width="344"
-            outlined
-          >
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="140"
-              >
-
-              <v-img
-                :lazy-src="item.image"
-                :src="item.image"
-              ></v-img>
-
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <div class="overline mb-4">
-                  Price: ${{ item.price }}
-                </div>
-                <v-list-item-title class="headline mb-1">
-                  {{ item.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle>Qty: {{ item.qty }}</v-list-item-subtitle>
-                <v-list-item-subtitle>Total: $ {{ parseFloat(item.qty * item.price).toFixed(2) }}</v-list-item-subtitle>
-              </v-list-item-content>
-
-            </v-list-item>
-
-            <v-card-actions class="justify-end">
-              <v-btn
-                @click="Remove(item.itemId)"
-                color="red"
-                outlined
-                rounded
-                text
-              >
-                <v-icon>mdi-trash-can</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+            :image="item.image"
+            :price="item.price"
+            :name="item.name"
+            :qty="item.qty"
+            :itemId="item.itemId"
+          />
         </v-col>
       </v-col>
       <v-col
@@ -155,6 +119,11 @@ import { mapState } from 'vuex'
 export default {
   name: 'Checkout',
 
+  components: {
+    Alert: () => import('../components/Alert.vue'),
+    Card: () => import('../components/Card.vue')
+  },
+
   data: () => ({
     loading: false
   }),
@@ -170,6 +139,11 @@ export default {
       phone: state => state.user.phone,
       email: state => state.user.email
     }),
+    message () {
+      return `${this.first_name} ${this.last_name}:
+              ${this.address} ${this.city} ${this.state},
+              ${this.zipcode} ${this.phone} ${this.email}`
+    },
     subTotal () {
       return parseFloat(this.$store.getters.cartTotal).toFixed(2)
     },
@@ -182,11 +156,8 @@ export default {
       return res.toFixed(2)
     }
   },
-  methods: {
-    Remove (itemId) {
-      this.$store.commit('remove', itemId)
-    },
 
+  methods: {
     Submit () {
       this.loading = true
       const { subTotal, tax, total } = this

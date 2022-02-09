@@ -22,58 +22,22 @@
             </v-btn>
           </div>
         </div>
-
-        <v-col
-          v-for="(item, index) in $store.state.cart"
-          :key="item.itemId"
-          :index="index"
-          cols="12"
-        >
-          <v-card
-            class="mx-auto mt-5"
-            max-width="344"
-            outlined
+          <v-col
+            v-for="(item, index) in $store.state.cart"
+            :key="item.itemId"
+            :index="index"
+            cols="12"
           >
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="140"
-              >
-
-              <v-img
-                :lazy-src="item.image"
-                :src="item.image"
-              ></v-img>
-
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <div class="overline mb-4">
-                  Price: ${{ item.price }}
-                </div>
-                <v-list-item-title class="headline mb-1">
-                  {{ item.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle>Qty: {{ item.qty }}</v-list-item-subtitle>
-                <v-list-item-subtitle>Total: $ {{ parseFloat(item.qty * item.price).toFixed(2) }}</v-list-item-subtitle>
-              </v-list-item-content>
-
-            </v-list-item>
-
-            <v-card-actions class="justify-end">
-              <v-btn
-                @click="Remove(item.itemId)"
-                color="red"
-                outlined
-                rounded
-                text
-              >
-                <v-icon>mdi-trash-can</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+            <Card
+              class="mx-auto mt-5"
+              :image="item.image"
+              :price="item.price"
+              :name="item.name"
+              :qty="item.qty"
+              :itemId="item.itemId"
+            />
+          </v-col>
         </v-col>
-      </v-col>
       <v-col
         order="first" order-sm="last"
         class="mt-7"
@@ -129,18 +93,17 @@
 </template>
 
 <script>
+
 export default {
   name: 'Cart',
+
+  components: {
+    Card: () => import('../components/Card.vue')
+  },
 
   computed: {
     subTotal () {
       return parseFloat(this.$store.getters.cartTotal).toFixed(2)
-    }
-  },
-
-  methods: {
-    Remove (itemId) {
-      this.$store.commit('remove', itemId)
     }
   }
 }
