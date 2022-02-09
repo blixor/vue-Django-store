@@ -18,13 +18,6 @@
               class="ma-2"
               max-width="200"
             >
-              <template slot="progress">
-                <v-progress-linear
-                  color="deep-purple"
-                  height="10"
-                  indeterminate
-                ></v-progress-linear>
-              </template>
               <div v-if="product.inventory < 1">
                 <v-img
                   height="250"
