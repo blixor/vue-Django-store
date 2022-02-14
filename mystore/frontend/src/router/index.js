@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -78,6 +79,13 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+// Check if user is login before showing login route.
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = store.getters.isLoggedIn
+  if (to.name === 'LoginForm' && isAuthenticated) next({ name: 'Home' })
+  else next()
 })
 
 export default router

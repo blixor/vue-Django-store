@@ -118,6 +118,7 @@ export default {
       isLogin: 'isLoggedIn'
     })
   },
+
   methods: {
     logout () {
       this.$store.dispatch('logout')
