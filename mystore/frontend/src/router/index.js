@@ -86,6 +86,8 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters.isLoggedIn
   if (to.name === 'LoginForm' && isAuthenticated) next({ name: 'Home' })
   else next()
+  if (to.name === 'RegisterForm' && isAuthenticated) next({ name: 'Home' })
+  else next()
 })
 
 export default router

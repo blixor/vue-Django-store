@@ -22,7 +22,7 @@
                 <v-img
                   height="250"
                   :src="product.image"
-                  alt="Image not available"
+                  :alt="product.name"
                 ></v-img>
               </div>
               <div v-else>
@@ -30,7 +30,7 @@
                 <v-img
                   height="250"
                   :src="product.image"
-                  alt="Image not available"
+                  :alt="product.name"
                 ></v-img>
                 </router-link>
               </div>
@@ -43,7 +43,7 @@
                   class="mx-0"
                 >
                   <!-- Stars -->
-                  <star-rating :item-id="product.id" :item-rating="product.rating[0]" />
+                  <StarRating :item-id="product.id" :item-rating="product.rating[0]" />
                 </v-row>
 
                 <div class="my-6 subtitle-1">
