@@ -73,6 +73,8 @@
   </v-container>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LoginForm',
 
@@ -95,6 +97,14 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      isLoggedIn: 'isLoggedIn',
+      cartLen: 'cartLen',
+      authStatus: 'authStatus'
+    })
+  },
+
   mounted () {
     if (document.cookie && document.cookie !== '') {
       const token = document.cookie.split('=')
@@ -114,8 +124,8 @@ export default {
             this.loading = false
           }
           // Grant access
-          if (this.$store.getters.authStatus === 'success' && this.$store.getters.isLoggedIn) {
-            this.$store.state.cart.length >= 1
+          if (this.authStatus === 'success' && this.isLoggedIn) {
+            this.cartLen >= 1
               ? this.$router.push('/checkout')
               : this.$router.push('/')
           }

@@ -6,7 +6,7 @@
         md="8"
         sm="6"
       >
-        <div v-if="$store.state.cart.length === 0">
+        <div v-if="isCart === 0">
           <h3
             class="text-center mt-16"
           >Your Cart is Empty!
@@ -70,7 +70,7 @@
               <h3 class="my-1">${{ subTotal }}</h3>
             </v-col>
           </v-row>
-          <v-card-actions v-if="$store.state.cart.length > 0">
+          <v-card-actions v-if="isCart > 0">
             <v-btn to="/pre-checkout"
               block
               color="#385F73"
@@ -81,7 +81,7 @@
             >Sub Total</v-btn>
           </v-card-actions>
 
-          <p v-if="$store.state.cart.length >= 1"
+          <p v-if="isCart >= 1"
              class="text-caption">
              *Review your transaction in next page.
           </p>
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Cart',
@@ -102,8 +103,12 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      isCart: 'cartLen',
+      cartTotal: 'cartTotal'
+    }),
     subTotal () {
-      return parseFloat(this.$store.getters.cartTotal).toFixed(2)
+      return parseFloat(this.cartTotal).toFixed(2)
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <v-container class="grey lighten-5 mt-5">
     <v-row
-      v-if="this.$store.state.cart.length >= 1"
+      v-if="isCart >= 1"
       class="justify-center">
       <Alert
         class="ma-5 mt-7"
@@ -20,7 +20,7 @@
         md="6"
         sm="6"
       >
-        <div v-if="$store.state.cart.length === 0">
+        <div v-if="isCart === 0">
           <h3
             class="text-center mt-16"
           >Your Cart is Empty!
@@ -96,7 +96,7 @@
             </v-col>
           </v-row>
           <v-card-actions>
-            <v-btn v-if="this.$store.state.cart.length >= 1"
+            <v-btn v-if="isCart >= 1"
               @click="Submit"
               :loading="loading"
               block
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Checkout',
@@ -129,6 +129,10 @@ export default {
   }),
 
   computed: {
+    ...mapGetters({
+      isCart: 'cartLen',
+      cartTotal: 'cartTotal'
+    }),
     ...mapState({
       first_name: state => state.user.first_name,
       last_name: state => state.user.last_name,
@@ -140,12 +144,16 @@ export default {
       email: state => state.user.email
     }),
     message () {
-      return `${this.first_name} ${this.last_name}:
-              ${this.address} ${this.city} ${this.state},
-              ${this.zipcode} ${this.phone} ${this.email}`
+      if (this.first_name !== undefined) {
+        return `${this.first_name} ${this.last_name}:
+                ${this.address} ${this.city} ${this.state},
+                ${this.zipcode} ${this.phone} ${this.email}`
+      } else {
+        return 'Please, Sign In; We do not have your info!'
+      }
     },
     subTotal () {
-      return parseFloat(this.$store.getters.cartTotal).toFixed(2)
+      return parseFloat(this.cartTotal).toFixed(2)
     },
     tax () {
       const number = this.subTotal * 0.115

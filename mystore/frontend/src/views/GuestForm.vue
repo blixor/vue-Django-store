@@ -1,131 +1,137 @@
 <template>
   <v-container class="grey lighten-5 mt-10 mb-16">
-    <v-row no-gutters class="d-flex justify-center">
-    <v-card
-      elevation="1"
-      class="mx-auto"
-      width="450"
+    <v-row
+      v-if="isCart >= 1"
+      class="d-flex justify-center"
+      no-gutters
     >
-      <v-form @submit.prevent="submit">
-        <v-card-text>
-          <p class="text-h4 text--primary mt-5 text-center">
-            Fill out Your information
-          </p>
-          <p class="text-center">
-            SubTotal: <b>${{ subTotal }}</b>
-          </p>
-          <v-divider></v-divider>
-          <p class="red--text">*Fill all the Blanks</p>
-          <!-- email -->
-          <v-col
-            cols="12"
-          >
-            <v-text-field
-              v-model="firstname"
-              :rules="nameRules"
-              label="First Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
-              v-model="lastname"
-              :rules="nameRules"
-              label="Last Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
-              v-model="phone"
-              label="Telephone"
-              placeholder="Telephone"
-              :rules="[rules.required, rules.num, rules.numMin]"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
-              v-model="address"
-              :rules="[rules.required]"
-              label="Address"
-              placeholder="Address"
-              required
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-          <v-row no-gutters>
-            <v-col cols='4'>
+      <v-card
+        elevation="1"
+        class="mx-auto"
+        width="450"
+      >
+        <v-form @submit.prevent="submit">
+          <v-card-text>
+            <p class="text-h4 text--primary mt-5 text-center">
+              Fill out Your information
+            </p>
+            <p class="text-center">
+              SubTotal: <b>${{ subTotal }}</b>
+            </p>
+            <v-divider></v-divider>
+            <p class="red--text">*Fill all the Blanks</p>
+            <!-- email -->
+            <v-col
+              cols="12"
+            >
               <v-text-field
-                class="mr-2"
-                v-model="city"
+                v-model="firstname"
+                :rules="nameRules"
+                label="First Name"
+                required
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                v-model="lastname"
+                :rules="nameRules"
+                label="Last Name"
+                required
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail"
+                required
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                v-model="phone"
+                label="Telephone"
+                placeholder="Telephone"
+                :rules="[rules.required, rules.num, rules.numMin]"
+                required
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                v-model="address"
                 :rules="[rules.required]"
-                label="City"
-                placeholder="City"
+                label="Address"
+                placeholder="Address"
                 required
                 outlined
                 dense
               ></v-text-field>
             </v-col>
-            <v-col
-              cols='4'
+            <v-row no-gutters>
+              <v-col cols='4'>
+                <v-text-field
+                  class="mr-2"
+                  v-model="city"
+                  :rules="[rules.required]"
+                  label="City"
+                  placeholder="City"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols='4'
+              >
+                <v-text-field
+                  class="mx-5"
+                  v-model="state"
+                  @input="(val) => (state = state.toUpperCase())"
+                  :rules="[rules.required, rules.min]"
+                  label="state"
+                  placeholder="State"
+                  required
+                  counter
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols='4'
+              >
+                <v-text-field
+                  v-model="zipcode"
+                  label="Zipcode"
+                  placeholder="Zipcode"
+                  :rules="[rules.required, rules.num]"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <div class="float-right">
+            <v-btn
+              type="submit"
+              class="ma-3"
+              color="#385F73"
+              :loading=loading
+              elevation='5'
+              dark
             >
-              <v-text-field
-                class="mx-5"
-                v-model="state"
-                @input="(val) => (state = state.toUpperCase())"
-                :rules="[rules.required, rules.min]"
-                label="state"
-                placeholder="State"
-                required
-                counter
-                outlined
-                dense
-              ></v-text-field>
-            </v-col>
-            <v-col
-              cols='4'
-            >
-              <v-text-field
-                v-model="zipcode"
-                label="Zipcode"
-                placeholder="Zipcode"
-                :rules="[rules.required, rules.num]"
-                required
-                outlined
-                dense
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <div class="float-right">
-          <v-btn
-            type="submit"
-            class="ma-3"
-            color="#385F73"
-            :loading=loading
-            elevation='5'
-            dark
-          >
-            Shop
-            <v-icon class="ml-1">mdi-purse</v-icon>
-          </v-btn>
-        </div>
-      </v-form>
-    </v-card>
+              Shop
+              <v-icon class="ml-1">mdi-purse</v-icon>
+            </v-btn>
+          </div>
+        </v-form>
+      </v-card>
     </v-row>
   </v-container>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'GuestForm',
 
@@ -163,8 +169,12 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      isCart: 'cartLen',
+      cartTotal: 'cartTotal'
+    }),
     subTotal () {
-      return parseFloat(this.$store.getters.cartTotal).toFixed(2)
+      return parseFloat(this.cartTotal).toFixed(2)
     }
   },
 

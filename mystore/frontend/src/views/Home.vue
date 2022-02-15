@@ -43,7 +43,10 @@
                   class="mx-0"
                 >
                   <!-- Stars -->
-                  <StarRating :item-id="product.id" :item-rating="product.rating[0]" />
+                  <StarRating
+                    :item-id="product.id"
+                    :item-rating="product.rating[0]"
+                  />
                 </v-row>
 
                 <div class="my-6 subtitle-1">
