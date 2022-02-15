@@ -88,6 +88,8 @@ router.beforeEach((to, from, next) => {
   else next()
   if (to.name === 'RegisterForm' && isAuthenticated) next({ name: 'Home' })
   else next()
+  if (to.name === 'Profile' && !isAuthenticated) next({ name: 'Home' })
+  else next()
 })
 
 export default router
