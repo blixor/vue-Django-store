@@ -144,12 +144,12 @@ export default {
       email: state => state.user.email
     }),
     message () {
-      if (this.first_name !== undefined) {
+      if (this.address !== '') {
         return `${this.first_name} ${this.last_name}:
                 ${this.address} ${this.city} ${this.state},
                 ${this.zipcode} ${this.phone} ${this.email}`
       } else {
-        return 'Please, Sign In; We do not have your info!'
+        return 'Please Sign In or go to your Account; We do not have your shipping info!'
       }
     },
     subTotal () {
