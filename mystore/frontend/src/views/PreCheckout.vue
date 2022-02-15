@@ -1,6 +1,10 @@
 <template>
   <v-container class="grey lighten-5">
-    <v-row class="justify-center mt-5" no-gutters>
+    <v-row
+      v-if="isCart >= 1"
+      class="justify-center mt-5"
+      no-gutters
+    >
       <v-col
         class="pa-3"
         cols="12"
@@ -85,7 +89,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      isLogin: 'isLoggedIn'
+      isLogin: 'isLoggedIn',
+      isCart: 'cartLen'
     })
   }
 }
