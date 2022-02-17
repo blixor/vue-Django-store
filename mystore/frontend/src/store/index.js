@@ -110,12 +110,18 @@ export default new Vuex.Store({
     cartLen: (_state, getters) => {
       return getters.getCart.length
     },
-    cartTotal: (state) => {
+    subTotal: (state) => {
       let res = 0
       state.cart.map(item => {
         res += item.price * item.qty
       })
-      return res
+      return parseFloat(res).toFixed(2)
+    },
+    tax: (_state, getters) => {
+      return (parseFloat(getters.subTotal) * 0.115).toFixed(2)
+    },
+    grandTotal: (state, getters) => {
+      return parseFloat(getters.subTotal) + parseFloat(getters.tax)
     }
   },
   actions: {

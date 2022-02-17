@@ -105,11 +105,8 @@ export default {
   computed: {
     ...mapGetters({
       isCart: 'cartLen',
-      cartTotal: 'cartTotal'
-    }),
-    subTotal () {
-      return parseFloat(this.cartTotal).toFixed(2)
-    }
+      subTotal: 'subTotal'
+    })
   }
 }
 </script>

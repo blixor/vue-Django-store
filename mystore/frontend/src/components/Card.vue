@@ -9,7 +9,7 @@
           tile
           size="140"
         >
-        <!-- TODO: SEPARATE IMG -->
+        <!-- TODO: SEPARATE IMG  and TEXT-FIELD(input) -->
         <v-img
           :lazy-src="image"
           :src="image"
@@ -32,6 +32,17 @@
 
       <v-card-actions class="justify-end">
         <v-btn
+          v-if="checkout"
+          to="/cart"
+          color="red"
+          outlined
+          rounded
+          text
+        >
+          Go to Delete<v-icon>mdi-trash-can</v-icon>
+        </v-btn>
+        <v-btn
+          v-else
           @click="Remove(itemId)"
           color="red"
           outlined
@@ -53,7 +64,8 @@ export default {
     price: String,
     name: String,
     qty: Number,
-    itemId: Number
+    itemId: Number,
+    checkout: Boolean
   },
 
   methods: {

@@ -50,6 +50,7 @@
             :name="item.name"
             :qty="item.qty"
             :itemId="item.itemId"
+            :checkout="true"
           />
         </v-col>
       </v-col>
@@ -92,7 +93,7 @@
 
             <v-divider></v-divider>
 
-            <h3 class="mt-1">${{ total }}</h3>
+            <h3 class="mt-1">${{ grandTotal }}</h3>
             </v-col>
           </v-row>
           <v-card-actions>
@@ -105,7 +106,7 @@
               elevation="2"
               rounded
               dark
-            >Pay ${{ total }} <v-icon class="ml-2">mdi-basket</v-icon></v-btn>
+            >Pay ${{ grandTotal }} <v-icon class="ml-2">mdi-basket</v-icon></v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -131,7 +132,9 @@ export default {
   computed: {
     ...mapGetters({
       isCart: 'cartLen',
-      cartTotal: 'cartTotal'
+      subTotal: 'subTotal',
+      tax: 'tax',
+      grandTotal: 'grandTotal'
     }),
     ...mapState({
       first_name: state => state.user.first_name,
@@ -151,17 +154,6 @@ export default {
       } else {
         return 'Please Sign In or go to your Account; We do not have your shipping info!'
       }
-    },
-    subTotal () {
-      return parseFloat(this.cartTotal).toFixed(2)
-    },
-    tax () {
-      const number = this.subTotal * 0.115
-      return number.toFixed(2)
-    },
-    total () {
-      const res = parseFloat(this.subTotal) + parseFloat(this.tax)
-      return res.toFixed(2)
     }
   },
 
