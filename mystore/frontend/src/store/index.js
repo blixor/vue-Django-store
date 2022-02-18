@@ -193,15 +193,14 @@ export default new Vuex.Store({
           })
         })
     },
-    async checkout ({ commit, state }, payload) {
-      const { subTotal, tax, total } = payload
+    async checkout ({ commit, state, getters }) {
       const res = await axios.post('http://127.0.0.1:8000/orders/order/', {
         order: {
           cart: state.cart,
           rating: state.stars,
-          subtotal: subTotal,
-          tax: tax,
-          total: total,
+          subtotal: getters.subTotal,
+          tax: getters.tax,
+          total: getters.grandTotal,
           first_name: state.user.first_name,
           last_name: state.user.last_name,
           email: state.user.email,

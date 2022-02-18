@@ -160,9 +160,8 @@ export default {
   methods: {
     Submit () {
       this.loading = true
-      const { subTotal, tax, total } = this
 
-      this.$store.dispatch('checkout', { subTotal, tax, total })
+      this.$store.dispatch('checkout')
         .catch((_err) => {
           this.loading = false
           const show = true
