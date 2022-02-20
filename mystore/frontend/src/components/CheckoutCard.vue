@@ -9,11 +9,10 @@
           tile
           size="140"
         >
-        <!-- TODO: SEPARATE IMG  and TEXT-FIELD(input) -->
-        <v-img
-          :lazy-src="image"
+
+        <ItemImage
           :src="image"
-        ></v-img>
+        />
 
         </v-list-item-avatar>
 
@@ -58,6 +57,10 @@
 <script>
 export default {
   name: 'Card',
+
+  components: {
+    ItemImage: () => import('./ItemImage.vue')
+  },
 
   props: {
     image: String,

@@ -7,13 +7,13 @@
       app
     >
     <router-link to="/">
-        <v-img
+        <ItemImage
           alt="Vuetify Logo"
           class="shrink mr-2"
-          contain
+          :contain="true"
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="40"
+          :width="40"
         />
       </router-link>
 
@@ -106,6 +106,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'NavBar',
+
+  components: {
+    ItemImage: () => import('./ItemImage.vue')
+  },
 
   data: () => ({
     drawer: false,

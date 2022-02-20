@@ -12,12 +12,12 @@
         cols="12"
         md="6"
       >
-      <v-img
-        :lazy-src="product.image"
+      <!-- TODO: CHECK IF MAX HEIGHT WORK OUTSIDE COMP. -->
+      <ItemImage
         max-height="300"
         max-width="400"
         :src="product.image"
-      ></v-img>
+      />
       </v-col>
       <!-- card -->
       <v-col
@@ -104,7 +104,8 @@ export default {
   name: 'Detail',
 
   components: {
-    Alert: () => import('../components/Alert.vue')
+    Alert: () => import('../components/Alert.vue'),
+    ItemImage: () => import('../components/ItemImage.vue')
   },
 
   props: {

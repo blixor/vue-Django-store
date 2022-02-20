@@ -19,19 +19,19 @@
               max-width="200"
             >
               <div v-if="product.inventory < 1">
-                <v-img
-                  height="250"
+                <ItemImage
+                  :height="250"
                   :src="product.image"
                   :alt="product.name"
-                ></v-img>
+                />
               </div>
               <div v-else>
                 <router-link :to="'/detail/' + product.slug">
-                <v-img
-                  height="250"
+                <ItemImage
+                  :height="250"
                   :src="product.image"
                   :alt="product.name"
-                ></v-img>
+                />
                 </router-link>
               </div>
 
@@ -114,9 +114,10 @@
 
 <script>
 import StarRating from '../components/StarRating.vue'
+import ItemImage from '../components/ItemImage.vue'
 
 export default {
-  components: { StarRating },
+  components: { StarRating, ItemImage },
 
   name: 'Home',
 
