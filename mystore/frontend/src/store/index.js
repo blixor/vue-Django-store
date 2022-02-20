@@ -141,7 +141,7 @@ export default new Vuex.Store({
       commit('AUTH_REQUEST')
       const res = await axios.post('http://127.0.0.1:8000/users/register/', user)
       if (res.status === 201) {
-        router.push('login/')
+        router.push('/profile')
       } else {
         commit('AUTH_ERROR')
         commit('cartSnack', {
