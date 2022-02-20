@@ -2,6 +2,8 @@
   <v-img
     :height="height"
     :width="width"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
     :src="src"
     :lazy-src="src"
     :alt="alt"
@@ -17,6 +19,8 @@ export default {
     src: String,
     height: Number,
     width: Number,
+    maxHeight: Number,
+    maxWidth: Number,
     contain: Boolean,
     transition: String,
     alt: String

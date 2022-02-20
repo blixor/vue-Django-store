@@ -12,10 +12,9 @@
         cols="12"
         md="6"
       >
-      <!-- TODO: CHECK IF MAX HEIGHT WORK OUTSIDE COMP. -->
       <ItemImage
-        max-height="300"
-        max-width="400"
+        :maxHeight="300"
+        :maxWidth="400"
         :src="product.image"
       />
       </v-col>
