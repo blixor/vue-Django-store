@@ -99,7 +99,7 @@ export default {
   name: 'Cart',
 
   components: {
-    Card: () => import('../components/Card.vue')
+    Card: () => import('../components/CheckoutCard.vue')
   },
 
   computed: {

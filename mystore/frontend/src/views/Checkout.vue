@@ -122,7 +122,7 @@ export default {
 
   components: {
     Alert: () => import('../components/Alert.vue'),
-    Card: () => import('../components/Card.vue')
+    Card: () => import('../components/CheckoutCard.vue')
   },
 
   data: () => ({

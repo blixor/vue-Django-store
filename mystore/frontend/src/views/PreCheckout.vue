@@ -14,26 +14,15 @@
           elevation="2"
           class="mx-auto py-3"
         >
-          <v-card
-            color="#385F73"
+          <PreCheckoutCard
             class="ma-5"
-            dark
-          >
-            <v-card-title class="text-h5">
-              Shop as a Guest!
-            </v-card-title>
-
-            <v-card-subtitle>Fill out a complete form to finish the transaction.</v-card-subtitle>
-
-            <v-card-actions>
-              <v-btn
-                to='/guest-form'
-                text
-              >
-                Shop Now
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+            color="#385F73"
+            :dark="true"
+            title="Shop as a Guest!"
+            subtitle="Fill out a complete form to finish the transaction."
+            :text="true"
+            btnText="Shop Now"
+          />
         </v-card>
       </v-col>
       <!-- card separation -->
@@ -46,32 +35,17 @@
           elevation="2"
           class="mx-auto py-3"
         >
-          <v-card
-            color="#5A6978"
+          <PreCheckoutCard
             class="ma-5"
-            dark
-          >
-            <v-card-title class="text-h5">
-              Sign In
-            </v-card-title>
-
-            <v-card-subtitle>Shop with your information in our records.</v-card-subtitle>
-
-            <v-card-actions>
-              <v-btn to='/login' text>
-                Log In
-              </v-btn>
-              <v-btn
-                to='/register'
-                text
-              >
-                Register
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+            color="#5A6978"
+            :dark="true"
+            title="Sign In"
+            subtitle="Shop with your information in our records."
+            :text="true"
+            :user="true"
+          />
         </v-card>
       </v-col>
-      <!-- end -->
       <v-col v-if="isLogin == true"
         cols="12"
       >
@@ -86,6 +60,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'PreCheckout',
+
+  components: {
+    PreCheckoutCard: () => import('../components/PreCheckoutCard.vue')
+  },
 
   computed: {
     ...mapGetters({
