@@ -7,7 +7,7 @@
       app
     >
     <router-link to="/">
-        <ItemImage
+        <Images
           alt="Vuetify Logo"
           class="shrink mr-2"
           :contain="true"
@@ -108,7 +108,7 @@ export default {
   name: 'NavBar',
 
   components: {
-    ItemImage: () => import('./ItemImage.vue')
+    Images: () => import('./Images.vue')
   },
 
   data: () => ({

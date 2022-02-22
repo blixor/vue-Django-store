@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: 'ItemImage',
+  name: 'Images',
 
   props: {
     src: String,

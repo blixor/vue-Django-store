@@ -10,7 +10,7 @@
           size="140"
         >
 
-        <ItemImage
+        <Images
           :src="image"
         />
 
@@ -59,7 +59,7 @@ export default {
   name: 'Card',
 
   components: {
-    ItemImage: () => import('./ItemImage.vue')
+    Images: () => import('./Images.vue')
   },
 
   props: {

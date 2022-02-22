@@ -12,7 +12,7 @@
         cols="12"
         md="6"
       >
-      <ItemImage
+      <Images
         :maxHeight="300"
         :maxWidth="400"
         :src="product.image"
@@ -104,7 +104,7 @@ export default {
 
   components: {
     Alert: () => import('../components/Alert.vue'),
-    ItemImage: () => import('../components/ItemImage.vue')
+    Images: () => import('../components/Images.vue')
   },
 
   props: {
