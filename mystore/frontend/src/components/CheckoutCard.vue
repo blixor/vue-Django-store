@@ -38,7 +38,7 @@
           rounded
           text
         >
-          Go to Delete<v-icon>mdi-trash-can</v-icon>
+          Edit your order!
         </v-btn>
         <v-btn
           v-else

@@ -2,7 +2,8 @@
   <v-container class="grey lighten-5 mt-5">
     <v-row
       v-if="isCart >= 1"
-      class="justify-center">
+        class="justify-center"
+      >
       <Alert
         class="ma-5 mt-7"
         color="#445F44"
