@@ -20,6 +20,7 @@
           dense
         ></v-text-field>
       </ValidationProvider>
+      <!-- password input -->
       <ValidationProvider
         v-if="passwordInput"
         :name="name"

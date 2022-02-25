@@ -20,28 +20,24 @@
     >
       <v-card>
         <v-card-title class="text-h5">
-          Are you sure you want to delete your account?
+          Are you sure you want<br> to delete your account?
         </v-card-title>
 
         <v-card-text>
           If you delete your account, you cannot restore it back, be certain of this action.
         </v-card-text>
 
-        <v-text-field
+        <FormInput
           class="ma-3"
-          v-model="old_password"
-          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[rules.required]"
-          :type="show ? 'text' : 'password'"
-          hint="Enter Your Current Password"
-          persistent-hint
+          v-model="password"
+          @propValue="password = $event"
+          value='password'
           label="Password"
-          @click:append="show = !show"
-          outline
-          required
-          dense
-        ></v-text-field>
-
+          :passwordInput="true"
+          name="password"
+          propRules="required|min:8|max:20"
+          hint="Enter Your Current Password"
+        />
         <v-card-actions>
           <v-spacer></v-spacer>
 
@@ -59,16 +55,17 @@
 </template>
 <script>
 export default {
-  name: 'DeleteAccount',
+  name: 'DeleteProfile',
+
+  components: {
+    FormInput: () => import('../components/FormInput.vue')
+  },
 
   data () {
     return {
       dialog: this.dialog,
       show: false,
-      old_password: '',
-      rules: {
-        required: value => !!value || 'Required'
-      }
+      password: ''
     }
   },
 
@@ -76,7 +73,7 @@ export default {
     deleteAccount () {
       this.dialog = false
       const username = this.$store.state.user.username
-      const password = this.old_password
+      const password = this.password
       this.$store.dispatch('delete', { username, password })
     }
   }

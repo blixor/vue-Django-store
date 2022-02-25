@@ -40,7 +40,9 @@
               propRules="required|min:8|max:20"
             />
           </v-col>
-          <div v-if="this.$store.state.status === 'Please try again!'" class="red--text text-center">
+          <div
+            v-if="this.$store.state.status === 'Please try again!'"
+            class="red--text text-center">
             {{ this.$store.state.status }}
           </div>
           <div class="text--primary">
