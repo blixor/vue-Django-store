@@ -11,76 +11,65 @@
           <p class="text-h4 text--primary mt-5">
             Register to our Store!
           </p>
+
           <v-divider></v-divider>
+
           <p class="red--text">*Fill all the Blanks</p>
-          <!-- email -->
           <v-col
             cols="12"
           >
-            <v-text-field
+            <FormInput
               v-model="username"
-              :rules="nameRules"
+              @propValue="username = $event"
+              value='username'
               label="User Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
+              name="username"
+              propRules="required|max:50"
+            />
+            <FormInput
               v-model="firstname"
-              :rules="nameRules"
+              @propValue="firstname = $event"
+              value='firstname'
               label="First Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
+              name="firstname"
+              propRules="required|max:50"
+            />
+            <FormInput
               v-model="lastname"
-              :rules="nameRules"
+              @propValue="lastname = $event"
+              value='lastname'
               label="Last Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
+              name="lastname"
+              propRules="required|max:50"
+            />
+            <FormInput
               v-model="email"
-              :rules="emailRules"
+              @propValue="email = $event"
+              value='email'
               label="E-mail"
-              required
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-          <!-- password -->
-          <v-col
-            cols="12"
-          >
-            <v-text-field
+              name="email"
+              propRules="required|email"
+            />
+            <FormInput
               v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min, rules.digit, rules.letter]"
-              :type="show1 ? 'text' : 'password'"
-              hint="At least 8 characters, use numbers and letters"
-              persistent-hint
+              @propValue="password = $event"
+              value='password'
               label="Password"
-              @click:append="show1 = !show1"
-              counter
-              outlined
-              required
-              dense
-            ></v-text-field>
-            <v-text-field
+              name="password"
+              propRules="required|min:8|max:20"
+              :passwordInput="true"
+              hint="At least 8 characters, please include numbers and letters"
+            />
+            <FormInput
               v-model="password2"
-              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min, rules.digit, rules.letter]"
-              :type="show2 ? 'text' : 'password'"
-              hint="Passwords must be different than your personal info"
+              @propValue="password2 = $event"
+              value='password2'
               label="Confirm new Password"
-              @click:append="show2 = !show2"
-              counter
-              outlined
-              required
-              dense
-            ></v-text-field>
+              name="password"
+              propRules="required|min:8|max:20"
+              :passwordInput="true"
+              hint="At least 8 characters, please include numbers and letters"
+            />
           </v-col>
           <!-- password match message -->
           <h4
@@ -106,13 +95,16 @@
   </v-container>
 </template>
 <script>
+
 export default {
   name: 'RegisterForm',
 
+  components: {
+    FormInput: () => import('../components/FormInput.vue')
+  },
+
   data () {
     return {
-      show1: false,
-      show2: false,
       loading: false,
       validation: true,
       message: '',
@@ -121,22 +113,7 @@ export default {
       username: '',
       firstname: '',
       lastname: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 20 || 'Name must be less than 20 characters'
-      ],
-      email: '',
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => v.length <= 50 || 'E-mail must be less than 50 characters',
-        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-      ],
-      rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters',
-        digit: value => /\d/.test(value) || 'Insert Numbers Please',
-        letter: value => /[A-z ]/.test(value) || 'Insert a letter Please'
-      }
+      email: ''
     }
   },
 

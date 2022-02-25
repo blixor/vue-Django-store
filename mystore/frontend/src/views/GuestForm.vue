@@ -20,94 +20,89 @@
             </p>
             <v-divider></v-divider>
             <p class="red--text">*Fill all the Blanks</p>
-            <!-- email -->
             <v-col
               cols="12"
             >
-              <v-text-field
+              <FormInput
                 v-model="firstname"
-                :rules="nameRules"
+                @propValue="firstname = $event"
+                value='firstname'
                 label="First Name"
-                required
-                outlined
-                dense
-              ></v-text-field>
-              <v-text-field
+                name="firstname"
+                propRules="required|max:50"
+              />
+              <FormInput
                 v-model="lastname"
-                :rules="nameRules"
+                @propValue="lastname = $event"
+                value='lastname'
                 label="Last Name"
-                required
-                outlined
-                dense
-              ></v-text-field>
-              <v-text-field
+                name="lastname"
+                propRules="required|max:50"
+              />
+              <FormInput
                 v-model="email"
-                :rules="emailRules"
+                @propValue="email = $event"
+                value='email'
                 label="E-mail"
-                required
-                outlined
-                dense
-              ></v-text-field>
-              <v-text-field
+                name="email"
+                propRules="required|email"
+              />
+              <FormInput
                 v-model="phone"
+                @propValue="phone = $event"
+                value="phone"
                 label="Telephone"
-                placeholder="Telephone"
-                :rules="[rules.required, rules.num, rules.numMin]"
-                required
-                outlined
-                dense
-              ></v-text-field>
-              <v-text-field
+                name="phone"
+                :counter="10"
+                propRules="required|digits:10"
+              />
+              <FormInput
                 v-model="address"
-                :rules="[rules.required]"
+                @propValue="address = $event"
                 label="Address"
-                placeholder="Address"
-                required
-                outlined
-                dense
-              ></v-text-field>
+                value="address"
+                name="address"
+                propRules="required"
+              />
             </v-col>
             <v-row no-gutters>
               <v-col cols='4'>
-                <v-text-field
+                <FormInput
                   class="mr-2"
                   v-model="city"
-                  :rules="[rules.required]"
+                  @propValue="city = $event"
                   label="City"
-                  placeholder="City"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
+                  name="city"
+                  propRules="required"
+                />
               </v-col>
               <v-col
                 cols='4'
               >
-                <v-text-field
+                <FormInput
                   class="mx-5"
                   v-model="state"
+                  @propValue="state = $event"
                   @input="(val) => (state = state.toUpperCase())"
-                  :rules="[rules.required, rules.min]"
-                  label="state"
-                  placeholder="State"
-                  required
-                  counter
-                  outlined
-                  dense
-                ></v-text-field>
+                  :stateInput="true"
+                  :counter="2"
+                  label="State"
+                  name="state"
+                  propRules="required|max:2"
+                />
               </v-col>
               <v-col
                 cols='4'
               >
-                <v-text-field
-                  v-model="zipcode"
-                  label="Zipcode"
-                  placeholder="Zipcode"
-                  :rules="[rules.required, rules.num]"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
+              <FormInput
+                v-model="zipcode"
+                @propValue="zipcode = $event"
+                value="zipcode"
+                label="Zipcode"
+                name="zipcode"
+                :counter="5"
+                propRules="required|digits:5"
+              />
               </v-col>
             </v-row>
           </v-card-text>
@@ -135,36 +130,21 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'GuestForm',
 
+  components: {
+    FormInput: () => import('../components/FormInput.vue')
+  },
+
   data () {
     return {
-      show1: false,
-      show2: false,
       loading: false,
       firstname: '',
       lastname: '',
+      email: '',
       phone: '',
       address: '',
       city: '',
       state: '',
-      zipcode: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 20 || 'Name must be less than 20 characters'
-      ],
-      email: '',
-      emailRules: [
-        (v) => !!v || 'E-mail is required',
-        (v) => v.length <= 50 || 'E-mail must be less than 50 characters',
-        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-      ],
-      rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length < 3 || 'Min 2 characters',
-        num: v => !/\D/.test(v) || 'Only numbers allowed',
-        pass: v => v.length >= 8 || 'Min 8 characters',
-        numMin: v => v.length === 10 || 'Enter exactly 10 numbers',
-        digit: value => /\d/.test(value) || 'Insert Numbers Please'
-      }
+      zipcode: ''
     }
   },
 

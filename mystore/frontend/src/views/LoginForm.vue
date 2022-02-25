@@ -17,32 +17,28 @@
           <v-col
             cols="12"
           >
-            <v-text-field
+            <FormInput
               v-model="username"
-              :rules="nameRules"
+              @propValue="username = $event"
+              value='username'
               label="User Name"
-              required
-              outlined
-              dense
-            ></v-text-field>
+              name="username"
+              propRules="required"
+            />
           </v-col>
           <!-- password -->
           <v-col
             cols="12"
           >
-            <v-text-field
+            <FormInput
               v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
-              :type="show1 ? 'text' : 'password'"
-              hint="At least 8 characters"
+              @propValue="password = $event"
+              value='password'
               label="Password"
-              @click:append="show1 = !show1"
-              counter
-              outlined
-              required
-              dense
-            ></v-text-field>
+              :passwordInput="true"
+              name="password"
+              propRules="required|min:8|max:20"
+            />
           </v-col>
           <div v-if="this.$store.state.status === 'Please try again!'" class="red--text text-center">
             {{ this.$store.state.status }}
@@ -74,26 +70,21 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import FormInput from '../components/FormInput.vue'
 
 export default {
   name: 'LoginForm',
 
+  components: {
+    FormInput
+  },
+
   data () {
     return {
-      show1: false,
-      show2: true,
       loading: false,
       csrftoken: '',
       password: '',
-      username: '',
-      nameRules: [
-        v => !!v || 'User Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters'
-      }
+      username: ''
     }
   },
 
