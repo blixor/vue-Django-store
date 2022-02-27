@@ -118,10 +118,10 @@ export default new Vuex.Store({
       })
       return parseFloat(res).toFixed(2)
     },
-    tax: (getters) => {
+    tax: (_state, getters) => {
       return (parseFloat(getters.subTotal) * 0.115).toFixed(2)
     },
-    grandTotal: (getters) => {
+    grandTotal: (_state, getters) => {
       return parseFloat(getters.subTotal) + parseFloat(getters.tax)
     }
   },

@@ -131,12 +131,12 @@ export default {
         this.quantity--
       }
     },
-    addToCart (productId, image, name, price) {
+    addToCart (itemId, image, name, price) {
       const qty = this.quantity
       const show = true
       const color = 'success'
       const text = 'Added to the Cart!'
-      this.$store.commit('addCart', { itemId: productId, qty, image, name, price })
+      this.$store.commit('addCart', { itemId, qty, image, name, price })
       this.$store.commit('cartSnack', { show, color, text })
     }
   }
