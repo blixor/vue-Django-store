@@ -105,10 +105,11 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    // Get cart length
-    getCart: state => state.cart,
-    cartLen: (_state, getters) => {
-      return getters.getCart.length
+    cartLen: (state) => {
+      const res = state.cart.map(item => {
+        return item.qty
+      })
+      return res.reduce((total, num) => total + num, 0)
     },
     subTotal: (state) => {
       let res = 0
@@ -117,10 +118,10 @@ export default new Vuex.Store({
       })
       return parseFloat(res).toFixed(2)
     },
-    tax: (_state, getters) => {
+    tax: (getters) => {
       return (parseFloat(getters.subTotal) * 0.115).toFixed(2)
     },
-    grandTotal: (state, getters) => {
+    grandTotal: (getters) => {
       return parseFloat(getters.subTotal) + parseFloat(getters.tax)
     }
   },
