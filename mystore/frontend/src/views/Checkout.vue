@@ -5,9 +5,9 @@
         class="justify-center"
       >
       <Alert
-        class="ma-5 mt-7"
+        class="ma-5 mt-7 subtitle-1"
         color="#445F44"
-        border="bottom"
+        border="left"
         icon="mdi-account"
         :dark=true
         :text=false
@@ -149,9 +149,9 @@ export default {
     }),
     message () {
       if (this.address !== '') {
-        return `${this.first_name} ${this.last_name}:
+        return `Name: ${this.first_name} ${this.last_name} | address:
                 ${this.address} ${this.city} ${this.state},
-                ${this.zipcode} ${this.phone} ${this.email}`
+                ${this.zipcode} | phone: ${this.phone} | email: ${this.email}`
       } else {
         return 'Please Sign In or go to your Account; We do not have your shipping info!'
       }
