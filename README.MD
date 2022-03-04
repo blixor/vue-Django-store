@@ -17,6 +17,9 @@ Django rest framework shopping cart With Vuejs. This project provides a template
   <img src="mystore\screenshots\admin.png" width="500" alt="screenshot">
 </p>
 
+## Stripe Integration
+[Instructions on how to connect Stripe](https://codingpr.com/#/stripe-vue-blog).
+
 ## Features
 
 - Log in
