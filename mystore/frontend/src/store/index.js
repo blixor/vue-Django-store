@@ -126,7 +126,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getProducts ({ commit }) {
-      await axios.get('http://127.0.0.1:8000/products/')
+      await axios.get('products/')
         .then((res) => {
           commit('SET_PRODUCTS', res.data)
         }).catch((_err) => {
@@ -139,7 +139,7 @@ export default new Vuex.Store({
     },
     async register ({ commit }, user) {
       commit('AUTH_REQUEST')
-      const res = await axios.post('http://127.0.0.1:8000/users/register/', user)
+      const res = await axios.post('users/register/', user)
       if (res.status === 201) {
         router.push('/login')
       } else {
@@ -155,7 +155,7 @@ export default new Vuex.Store({
     async login ({ commit }, user) {
       commit('AUTH_REQUEST')
       axios.defaults.headers.common['X-CSRFToken'] = user.csrftoken
-      await axios.post('http://127.0.0.1:8000/users/login/', user)
+      await axios.post('users/login/', user)
         .then((res) => {
           if (res.status === 200) {
             const authToken = res.data.token
@@ -176,7 +176,7 @@ export default new Vuex.Store({
     async update ({ commit, state }, profile) {
       const id = state.user.user_id
       const token = state.token
-      await axios.patch(`http://127.0.0.1:8000/users/update/${id}/`, profile, {
+      await axios.patch(`users/update/${id}/`, profile, {
         headers: {
           Authorization: `Token ${token}`
         }
@@ -194,7 +194,7 @@ export default new Vuex.Store({
         })
     },
     async checkout ({ commit, state, getters }) {
-      const res = await axios.post('http://127.0.0.1:8000/orders/order/', {
+      const res = await axios.post('orders/order/', {
         order: {
           cart: state.cart,
           rating: state.stars,
@@ -220,7 +220,7 @@ export default new Vuex.Store({
     async delete ({ commit, state }, user) {
       const id = state.user.user_id
       const token = state.token
-      await axios.post(`http://127.0.0.1:8000/users/delete/${id}/`, user, {
+      await axios.post(`users/delete/${id}/`, user, {
         headers: {
           Authorization: `Token ${token}`
         }
@@ -244,7 +244,7 @@ export default new Vuex.Store({
     async changePassword ({ commit, state }, passwords) {
       const id = state.user.user_id
       const token = state.token
-      await axios.put(`http://127.0.0.1:8000/users/delete/${id}/`, passwords, {
+      await axios.put(`users/delete/${id}/`, passwords, {
         headers: {
           Authorization: `Token ${token}`
         }
@@ -261,7 +261,7 @@ export default new Vuex.Store({
         })
     },
     async passwordReset ({ commit }, email) {
-      await axios.post('http://127.0.0.1:8000/api/password_reset/', {
+      await axios.post('api/password_reset/', {
         email: email
       })
         .then((res) => {
@@ -280,7 +280,7 @@ export default new Vuex.Store({
     async resetPasswordConfirm ({ commit }, payload) {
       const token = payload.token
       const password = payload.password
-      await axios.post(`http://127.0.0.1:8000/api/password_reset/confirm/?token=${token}`, {
+      await axios.post(`api/password_reset/confirm/?token=${token}`, {
         password: password,
         token: token
       })
@@ -298,7 +298,7 @@ export default new Vuex.Store({
         })
     },
     async logout ({ commit }) {
-      const res = await axios.post('http://127.0.0.1:8000/users/logout/')
+      const res = await axios.post('users/logout/')
       if (res) {
         commit('LOGOUT')
         delete axios.defaults.headers.common['Authorization']

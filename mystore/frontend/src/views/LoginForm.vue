@@ -72,13 +72,12 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import FormInput from '../components/FormInput.vue'
 
 export default {
   name: 'LoginForm',
 
   components: {
-    FormInput
+    FormInput: () => import('../components/FormInput.vue')
   },
 
   data () {
