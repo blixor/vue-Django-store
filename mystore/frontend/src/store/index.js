@@ -126,16 +126,18 @@ export default new Vuex.Store({
   },
   actions: {
     async getProducts ({ commit }) {
-      await axios.get('products/')
-        .then((res) => {
+      try {
+        const res = await axios.get('products/')
+        if (res) {
           commit('SET_PRODUCTS', res.data)
-        }).catch((_err) => {
-          commit('cartSnack', {
-            show: true,
-            color: 'red darken-3',
-            text: 'Server Error'
-          })
+        }
+      } catch (error) {
+        commit('cartSnack', {
+          show: true,
+          color: 'red darken-3',
+          text: 'Server Error'
         })
+      }
     },
     async register ({ commit }, user) {
       commit('AUTH_REQUEST')
@@ -153,45 +155,44 @@ export default new Vuex.Store({
       }
     },
     async login ({ commit }, user) {
-      commit('AUTH_REQUEST')
-      axios.defaults.headers.common['X-CSRFToken'] = user.csrftoken
-      await axios.post('users/login/', user)
-        .then((res) => {
-          if (res.status === 200) {
-            const authToken = res.data.token
-            const user = res.data
-            axios.defaults.headers.common['Authorization'] = authToken
-            commit('AUTH_SUCCESS', {
-              token: authToken,
-              user: user
-            })
-          }
-        })
-        .catch((_err) => {
-          commit('AUTH_ERROR')
-          delete axios.defaults.headers.common['Authorization']
-        })
+      try {
+        commit('AUTH_REQUEST')
+        axios.defaults.headers.common['X-CSRFToken'] = user.csrftoken
+        const res = await axios.post('users/login/', user)
+        if (res.status === 200) {
+          const authToken = res.data.token
+          const user = res.data
+          axios.defaults.headers.common['Authorization'] = authToken
+          commit('AUTH_SUCCESS', {
+            token: authToken,
+            user: user
+          })
+        }
+      } catch (error) {
+        commit('AUTH_ERROR')
+        delete axios.defaults.headers.common['Authorization']
+      }
     },
     // user update
     async update ({ commit, state }, profile) {
       const id = state.user.user_id
       const token = state.token
-      await axios.patch(`users/update/${id}/`, profile, {
+      const res = await axios.patch(`users/update/${id}/`, profile, {
         headers: {
           Authorization: `Token ${token}`
         }
       })
-        .then((res) => {
-          const profile = res.data
-          commit('PROFILE_UPDATE', {
-            profile: profile
-          })
-          commit('cartSnack', {
-            show: true,
-            color: 'success',
-            text: 'Update Profile Success!'
-          })
+      if (res) {
+        const profile = res.data
+        commit('PROFILE_UPDATE', {
+          profile: profile
         })
+        commit('cartSnack', {
+          show: true,
+          color: 'success',
+          text: 'Update Profile Success!'
+        })
+      }
     },
     async checkout ({ commit, state, getters }) {
       const res = await axios.post('orders/order/', {
@@ -220,82 +221,69 @@ export default new Vuex.Store({
     async delete ({ commit, state }, user) {
       const id = state.user.user_id
       const token = state.token
-      await axios.post(`users/delete/${id}/`, user, {
-        headers: {
-          Authorization: `Token ${token}`
-        }
-      })
-        .then((res) => {
-          // delete all the states
-          if (res.status === 204) {
-            commit('LOGOUT')
-            delete axios.defaults.headers.common['Authorization']
-            router.push('/')
+      try {
+        const res = await axios.post(`users/delete/${id}/`, user, {
+          headers: {
+            Authorization: `Token ${token}`
           }
         })
-        .catch((_err) => {
-          commit('cartSnack', {
-            show: true,
-            color: 'red darken-3',
-            text: 'An error has ocurred, check your password'
-          })
+        if (res.status === 204) {
+          commit('LOGOUT')
+          delete axios.defaults.headers.common['Authorization']
+          router.push('/')
+        }
+      } catch (error) {
+        commit('cartSnack', {
+          show: true,
+          color: 'red darken-3',
+          text: 'An error has ocurred, check your password'
         })
+      }
     },
     async changePassword ({ commit, state }, passwords) {
       const id = state.user.user_id
       const token = state.token
-      await axios.put(`users/delete/${id}/`, passwords, {
+      const res = await axios.put(`users/delete/${id}/`, passwords, {
         headers: {
           Authorization: `Token ${token}`
         }
       })
-        .then((_res) => {
-          commit('LOGOUT')
-          delete axios.defaults.headers.common['Authorization']
-          router.push('/login')
-          commit('cartSnack', {
-            show: true,
-            color: 'success',
-            text: 'Password Change Success!'
-          })
+      if (res) {
+        commit('LOGOUT')
+        delete axios.defaults.headers.common['Authorization']
+        router.push('/login')
+        commit('cartSnack', {
+          show: true,
+          color: 'success',
+          text: 'Password Change Success!'
         })
+      }
     },
     async passwordReset ({ commit }, email) {
-      await axios.post('api/password_reset/', {
+      const res = await axios.post('api/password_reset/', {
         email: email
       })
-        .then((res) => {
-          if (res.data.status === 'OK') {
-            router.push('/password_reset/done')
-          }
-        })
-        .catch((_err) => {
-          commit('cartSnack', {
-            show: true,
-            color: 'red darken-3',
-            text: 'An error has ocurred, try again!'
-          })
-        })
+      if (res.data.status === 'OK') {
+        router.push('/password_reset/done')
+      }
     },
     async resetPasswordConfirm ({ commit }, payload) {
-      const token = payload.token
-      const password = payload.password
-      await axios.post(`api/password_reset/confirm/?token=${token}`, {
-        password: password,
-        token: token
-      })
-        .then((res) => {
-          if (res.data.status === 'OK') {
-            router.push('/login')
-          }
+      const { token, password } = payload
+      try {
+        const res = await axios.post(`api/password_reset/confirm/?token=${token}`, {
+          password: password,
+          token: token
         })
-        .catch((_err) => {
-          commit('cartSnack', {
-            show: true,
-            color: 'red darken-3',
-            text: 'An error has ocurred, try again!'
-          })
+        if (res.data.status === 'OK') {
+          router.push('/login')
+        }
+      } catch (error) {
+        commit('cartSnack', {
+          show: true,
+          color: 'red darken-3',
+          text: 'An error has ocurred, try again!'
         })
+      }
     },
     async logout ({ commit }) {
       const res = await axios.post('users/logout/')

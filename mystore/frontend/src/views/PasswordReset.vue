@@ -72,11 +72,11 @@ export default {
       this.$store.dispatch('passwordReset', email)
         .then((_res) => {
           this.loading = false
-        }).catch((err) => {
+        }).catch((_err) => {
           this.loading = false
           const show = true
           const color = 'red darken-3'
-          const text = err
+          const text = 'Server Error, Try Again Later'
           this.$store.commit('cartSnack', { show, color, text })
         })
     }

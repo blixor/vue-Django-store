@@ -42,5 +42,12 @@ class Rating(models.Model):
 
       def __str__(self):
           # Extract all rating values and return max key.
-          rating_list = {'1': self.one, '2': self.two, '3': self.three, '4': self.four, '5': self.five}
+          # Reverse this list if there is a tie and you want the last key.
+          rating_list = {
+            '1': self.one,
+            '2': self.two,
+            '3': self.three,
+            '4': self.four,
+            '5': self.five
+          }
           return str(max(rating_list, key=rating_list.get))
