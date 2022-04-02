@@ -32,7 +32,7 @@ export default {
 
   methods: {
     changeVal (value, itemId) {
-      this.$store.commit('starRating', { itemId: itemId, value })
+      this.$store.commit('starRating', { itemId, value })
     }
   }
 }

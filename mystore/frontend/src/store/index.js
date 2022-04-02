@@ -195,26 +195,34 @@ export default new Vuex.Store({
       }
     },
     async checkout ({ commit, state, getters }) {
-      const res = await axios.post('orders/order/', {
-        order: {
-          cart: state.cart,
-          rating: state.stars,
-          subtotal: getters.subTotal,
-          tax: getters.tax,
-          total: getters.grandTotal,
-          first_name: state.user.first_name,
-          last_name: state.user.last_name,
-          email: state.user.email,
-          phone: state.user.phone,
-          address: state.user.address,
-          city: state.user.city,
-          state: state.user.state,
-          zipcode: state.user.zipcode
+      try {
+        const res = await axios.post('orders/order/', {
+          order: {
+            cart: state.cart,
+            rating: state.stars,
+            subtotal: getters.subTotal,
+            tax: getters.tax,
+            total: getters.grandTotal,
+            first_name: state.user.first_name,
+            last_name: state.user.last_name,
+            email: state.user.email,
+            phone: state.user.phone,
+            address: state.user.address,
+            city: state.user.city,
+            state: state.user.state,
+            zipcode: state.user.zipcode
+          }
+        })
+        if (res.status === 200) {
+          commit('CHECKOUT_SUCCESS')
+          // TODO: push thankyou page
         }
-      })
-      if (res.status === 200) {
-        commit('CHECKOUT_SUCCESS')
-        // TODO: push thankyou page
+      } catch (error) {
+        commit('cartSnack', {
+          show: true,
+          color: 'red darken-3',
+          text: 'An error has ocurred!'
+        })
       }
     },
     // deactivate user
