@@ -22,9 +22,9 @@ export default {
   name: 'Profile',
 
   components: {
-    UpdateProfile: () => import('../components/UpdateProfile.vue'),
-    UpdatePassword: () => import('../components/UpdatePassword.vue'),
-    DeleteProfile: () => import('../components/DeleteProfile.vue')
+    UpdateProfile: () => import('../components/UpdateProfile'),
+    UpdatePassword: () => import('../components/UpdatePassword'),
+    DeleteProfile: () => import('../components/DeleteProfile')
   },
 
   computed: {

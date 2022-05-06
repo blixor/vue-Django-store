@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
 
 Vue.use(VueRouter)
 
@@ -15,57 +15,57 @@ const routes = [
     path: '/detail/:slug',
     name: 'Detail',
     props: true,
-    component: () => import('../views/Detail.vue')
+    component: () => import('../views/Detail')
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('../views/Profile.vue')
+    component: () => import('../views/Profile')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import('../views/Cart.vue')
+    component: () => import('../views/Cart')
   },
   {
     path: '/register',
     name: 'RegisterForm',
-    component: () => import('../views/RegisterForm.vue')
+    component: () => import('../views/RegisterForm')
   },
   {
     path: '/login',
     name: 'LoginForm',
-    component: () => import('../views/LoginForm.vue')
+    component: () => import('../views/LoginForm')
   },
   {
     path: '/password_reset',
     name: 'PasswordReset',
-    component: () => import('../views/PasswordReset.vue')
+    component: () => import('../views/PasswordReset')
   },
   {
     path: '/password_reset/done',
     name: 'PasswordResetDone',
-    component: () => import('../views/PasswordResetDone.vue')
+    component: () => import('../views/PasswordResetDone')
   },
   {
     path: '/api/password_reset/confirm/:token?',
     name: 'PasswordResetConfirm',
-    component: () => import('../views/PasswordResetConfirm.vue')
+    component: () => import('../views/PasswordResetConfirm')
   },
   {
     path: '/pre-checkout',
     name: 'PreCheckout',
-    component: () => import('../views/PreCheckout.vue')
+    component: () => import('../views/PreCheckout')
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import('../views/Checkout.vue')
+    component: () => import('../views/Checkout')
   },
   {
     path: '/guest-form',
     name: 'GuestForm',
-    component: () => import('../views/GuestForm.vue')
+    component: () => import('../views/GuestForm')
   },
   {
     path: '/about',
@@ -73,7 +73,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/About')
   }
 ]
 

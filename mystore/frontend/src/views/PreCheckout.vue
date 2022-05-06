@@ -62,7 +62,7 @@ export default {
   name: 'PreCheckout',
 
   components: {
-    PreCheckoutCard: () => import('../components/PreCheckoutCard.vue')
+    PreCheckoutCard: () => import('../components/PreCheckoutCard')
   },
 
   computed: {

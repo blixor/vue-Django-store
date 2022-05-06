@@ -108,7 +108,7 @@ export default {
   name: 'NavBar',
 
   components: {
-    Images: () => import('./Images.vue')
+    Images: () => import('./Images')
   },
 
   data: () => ({

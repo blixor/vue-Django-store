@@ -63,7 +63,7 @@ export default {
   name: 'UpdatePassword',
 
   components: {
-    FormInput: () => import('../components/FormInput.vue')
+    FormInput: () => import('../components/FormInput')
   },
 
   data () {

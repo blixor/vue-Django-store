@@ -59,7 +59,7 @@ export default {
   name: 'Card',
 
   components: {
-    Images: () => import('./Images.vue')
+    Images: () => import('./Images')
   },
 
   props: {

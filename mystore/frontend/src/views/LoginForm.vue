@@ -77,7 +77,7 @@ export default {
   name: 'LoginForm',
 
   components: {
-    FormInput: () => import('../components/FormInput.vue')
+    FormInput: () => import('../components/FormInput')
   },
 
   data () {

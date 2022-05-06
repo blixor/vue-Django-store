@@ -122,8 +122,8 @@ export default {
   name: 'Checkout',
 
   components: {
-    Alert: () => import('../components/Alert.vue'),
-    Card: () => import('../components/CheckoutCard.vue')
+    Alert: () => import('../components/Alert'),
+    Card: () => import('../components/CheckoutCard')
   },
 
   data: () => ({

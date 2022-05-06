@@ -103,8 +103,8 @@ export default {
   name: 'Detail',
 
   components: {
-    Alert: () => import('../components/Alert.vue'),
-    Images: () => import('../components/Images.vue')
+    Alert: () => import('../components/Alert'),
+    Images: () => import('../components/Images')
   },
 
   props: {

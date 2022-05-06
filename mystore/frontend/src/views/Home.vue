@@ -113,8 +113,8 @@
 </template>
 
 <script>
-import StarRating from '../components/StarRating.vue'
-import Images from '../components/Images.vue'
+import StarRating from '../components/StarRating'
+import Images from '../components/Images'
 
 export default {
   components: { StarRating, Images },

@@ -58,7 +58,7 @@ export default {
   name: 'DeleteProfile',
 
   components: {
-    FormInput: () => import('../components/FormInput.vue')
+    FormInput: () => import('../components/FormInput')
   },
 
   data () {

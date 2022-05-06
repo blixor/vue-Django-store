@@ -24,7 +24,7 @@ export default {
   name: 'PasswordResetDone',
 
   components: {
-    Alert: () => import('../components/Alert.vue')
+    Alert: () => import('../components/Alert')
   }
 }
 </script>

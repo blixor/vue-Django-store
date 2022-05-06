@@ -131,7 +131,7 @@ export default {
   name: 'GuestForm',
 
   components: {
-    FormInput: () => import('../components/FormInput.vue')
+    FormInput: () => import('../components/FormInput')
   },
 
   data () {

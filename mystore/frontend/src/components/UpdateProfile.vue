@@ -112,7 +112,7 @@ export default {
   name: 'updateProfile',
 
   components: {
-    FormInput: () => import('../components/FormInput.vue')
+    FormInput: () => import('../components/FormInput')
   },
 
   computed: {
