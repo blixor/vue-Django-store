@@ -18,7 +18,7 @@ Django rest framework shopping cart With Vuejs. This project provides a template
 </p>
 
 ## Stripe Integration
-[Instructions on how to connect Stripe](https://codingpr.com/stripe-vue-blog).
+[Instructions on how to connect Stripe](https://codingpr.com/stripe-vue-blog/).
 
 ## Features
 
@@ -48,20 +48,21 @@ Django rest framework shopping cart With Vuejs. This project provides a template
 
 ## Setup django
 
-- Clone repository
+- [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+- Create a new directory
+- cd to your new directory
+- Clone Repo
 
 ``` python
-git clone https://github.com/Denisse-AB/django_store.git
-cd django_store
+git clone https://github.com/<your-github-username>/django_store.git
 ```
-
+- cd django_store
 - Create your virtual environment
 
 ```python
 pip install pipenv
 pipenv install
 pipenv shell
-cd mystore
 ```
 
 - Configure settings.py (database connection, email and AWS)
