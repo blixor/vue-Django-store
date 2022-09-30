@@ -149,7 +149,7 @@ export default new Vuex.Store({
         commit('cartSnack', {
           show: true,
           color: 'red darken-3',
-          text: res.data.username ? res.data.username[0] : 'An error has ocurred'
+          text: res.data.username ? res.data.username[0] : 'An error has ocurred, check your password'
         })
         delete axios.defaults.headers.common['Authorization']
       }

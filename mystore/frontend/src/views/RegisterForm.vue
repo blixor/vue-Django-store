@@ -58,7 +58,7 @@
               name="password"
               propRules="required|min:8|max:20"
               :passwordInput="true"
-              hint="At least 8 characters, please include numbers and letters"
+              hint="At least 8 characters, please include random numbers and letters"
             />
             <FormInput
               v-model="password2"
@@ -68,7 +68,7 @@
               name="password"
               propRules="required|min:8|max:20"
               :passwordInput="true"
-              hint="At least 8 characters, please include numbers and letters"
+              hint="At least 8 characters, please include random numbers and letters"
             />
           </v-col>
           <!-- password match message -->

@@ -25,7 +25,7 @@
           :passwordInput="true"
           name="password"
           propRules="required|min:8|max:20"
-          hint="At least 8 characters, use numbers and letters"
+          hint="At least 8 characters, use random numbers and letters"
         />
         <FormInput
           class="mt-3"
