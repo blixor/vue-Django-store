@@ -1,21 +1,4 @@
-# Django-Vue Shopping Cart
-
-Django rest framework shopping cart With Vuejs. This project provides a template for local development.
-
----
-
-<p align="center">
-  <img src="mystore\screenshots\screenshot(1).png" width="500" alt="screenshot">
-</p>
-<p align="center">
-  <img src="mystore\screenshots\screenshot(2).png" width="500" alt="screenshot">
-</p>
-<p align="center">
-  <img src="mystore\screenshots\screenshot(3).png" width="500" alt="screenshot">
-</p>
-<p align="center">
-  <img src="mystore\screenshots\admin.png" width="500" alt="screenshot">
-</p>
+# Shopping Cart
 
 ## Stripe Integration
 [Instructions on how to connect Stripe](https://codingpr.com/stripe-vue-blog/).
